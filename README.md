@@ -1,8 +1,10 @@
 # Agent Usage Coach
 
-A Cursor skill that coaches **how you use a coding agent**, not the code.
+A portable **agent skill** that coaches **how the human uses a coding agent**, not the code.
 
-It classifies each turn by intent and session state, then:
+It is not Cursor-specific. Any agent that can load a `SKILL.md` folder — or read `AGENTS.md` — can run it: Claude Code, Codex, Gemini CLI, Copilot, Cursor, and others.
+
+Each turn is classified by intent and session state, then:
 
 | Action | When |
 | --- | --- |
@@ -13,29 +15,66 @@ It classifies each turn by intent and session state, then:
 
 Detection is model-judged. Listed examples are situations, not keyword matchers.
 
-## Install
+## What this repo is
 
-Clone into your personal Cursor skills folder:
+This repository **is** the skill directory. Clone it into whatever skills path your tool reads, or vendor it and point `AGENTS.md` at `SKILL.md`.
+
+| File | Role |
+| --- | --- |
+| `SKILL.md` | Entry point — classifier, policy, anti-nag, response template |
+| `anti-patterns.md` | Catalog, loaded only when a violation is suspected |
+| `good-briefs.md` | Before/after brief rewrites, loaded only on ASK |
+| `AGENTS.md` | Repo-level pointer so an agent in this folder still loads the coach |
+
+## Install as a skill
+
+Put this folder where your agent discovers skills. The folder name should stay `agent-usage-coach` and must contain `SKILL.md`.
+
+**Personal (all your projects)**
+
+| Tool | Path |
+| --- | --- |
+| Vendor-neutral | `~/.agents/skills/agent-usage-coach/` |
+| Claude Code | `~/.claude/skills/agent-usage-coach/` |
+| Codex | `~/.agents/skills/agent-usage-coach/` |
+| Gemini CLI | `~/.gemini/skills/agent-usage-coach/` |
+| GitHub Copilot | `~/.copilot/skills/agent-usage-coach/` or `~/.github/skills/` per your build |
+| Cursor | `~/.cursor/skills/agent-usage-coach/` |
 
 ```bash
-git clone https://github.com/DomEscobar/agent-usage-coach.git ~/.cursor/skills/agent-usage-coach
+git clone https://github.com/DomEscobar/agent-usage-coach.git ~/.agents/skills/agent-usage-coach
 ```
 
 Windows (PowerShell):
 
 ```powershell
-git clone https://github.com/DomEscobar/agent-usage-coach.git $HOME\.cursor\skills\agent-usage-coach
+git clone https://github.com/DomEscobar/agent-usage-coach.git $HOME\.agents\skills\agent-usage-coach
 ```
 
-Or copy the folder into a project's `.cursor/skills/agent-usage-coach/` to share it with the repo.
+Copy or symlink that folder into any other tool path you actually use. One clone, many pointers.
 
-The skill auto-invokes (no `disable-model-invocation`). After install, start a new agent chat.
+**Project (shared with the team)**
 
-## Files
+Prefer the vendor-neutral location so mixed-tool teams see the same skill:
 
-- `SKILL.md` — classifier, policy, anti-nag, response template
-- `anti-patterns.md` — catalog, read only when a violation is suspected
-- `good-briefs.md` — before/after brief rewrites, read only on ASK
+```text
+.agents/skills/agent-usage-coach/SKILL.md
+```
+
+Then symlink or copy into `.claude/skills/`, `.gemini/skills/`, or `.cursor/skills/` only if a tool does not follow `.agents/skills/`.
+
+Start a new agent session after install.
+
+## Use without a skills loader
+
+If the tool does not discover skills, add this to the project's `AGENTS.md` (or `CLAUDE.md` / `GEMINI.md` that points at it):
+
+```md
+On every coding turn, read and follow
+path/to/agent-usage-coach/SKILL.md
+```
+
+Or clone this repo and work from it — root `AGENTS.md` already does that.
 
 ## License
 

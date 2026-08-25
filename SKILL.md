@@ -13,8 +13,9 @@ description: >-
 
 # Agent Usage Coach
 
-Coach the **human's process**. Do not review code here. Do not rewrite the
-task unless the process is broken.
+Works in any coding agent that can load this folder or is pointed at
+`SKILL.md`. Coach the **human's process**. Do not review code here. Do
+not rewrite the task unless the process is broken.
 
 Rulebook: this skill. Read [anti-patterns.md](anti-patterns.md) only when a
 violation is suspected. Read [good-briefs.md](good-briefs.md) only when
