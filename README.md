@@ -21,9 +21,9 @@ This repository **is** the skill directory. Clone it into whatever skills path y
 
 | File | Role |
 | --- | --- |
-| `SKILL.md` | Entry point — classifier, policy, anti-nag, response template |
-| `anti-patterns.md` | Catalog, loaded only when a violation is suspected |
-| `good-briefs.md` | Before/after brief rewrites, loaded only on ASK |
+| `SKILL.md` | Entry point — classifier, four NUDGE buckets, anti-nag, scorecard |
+| `anti-patterns.md` | ~30 situations with measured costs, loaded only when a violation is suspected |
+| `good-briefs.md` | 12 before/after brief rewrites, loaded only on ASK |
 | `AGENTS.md` | Repo-level pointer so an agent in this folder still loads the coach |
 
 ## Install as a skill
